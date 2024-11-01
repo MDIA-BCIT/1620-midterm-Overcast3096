@@ -13,3 +13,46 @@ CHALLENGE
 - If the password is less than 5 characters, log out "Your password is too short!".
 */
 
+// database is the "correct" password, entered is what the user enters
+function checkUserPassword(database, entered) {
+    // Checks password 
+    if (database === entered) {
+        console.log("Access Granted!");
+    } else {
+        // Special cases 
+        if (entered === "forgot") {
+            console.log("Here is a hint");
+            return;
+        };
+    
+        if (entered === "reset") {
+            console.log("Let's reset your account");
+            return;
+        };
+
+        // Passwords that fails all checks
+        console.log("Access Denied!");
+        return;
+    };
+
+    // Code here runs ONLY IF check succeeds - the above else statement is a catch-all as it returns no matter what
+    if (database === "forgot" || database === "reset") {
+        console.log("This password you set should not be used because it glitches the system");
+    };
+
+    if (database.length < 5) {
+        console.log("Your password is too short!");
+    };
+    return;
+};
+
+console.log("--- Basic Tests ---");
+checkUserPassword("password", "password");
+checkUserPassword("password", "123");
+checkUserPassword("password", "forgot");
+checkUserPassword("password", "reset");
+
+console.log("--- Challenge Tests ---");
+checkUserPassword("reset", "reset");
+checkUserPassword("forgot", "forgot");
+checkUserPassword("abc", "abc");
